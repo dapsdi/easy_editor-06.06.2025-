@@ -88,10 +88,15 @@ def showChosenImage():
       filename = lw_files.currentItem().text() #отримання ім'я вибраного фалйа
       workimage.loadImage(filename, workdir) #завантаження зображення
       image_path = os.path.join(workdir, workimage.filename) #формування шляху до зображення
-      workimage.showImage(image_path, lb_image) 
+      workimage.showImage(image_path, lb_image)
+
+def blackwhite_image():
+   workimage.do_blackwhite(workdir, lb_image) #перетворення зображення у чорно-біле 
 
 
-
+#підключення кнопок до функцій
 btn_dir.clicked.connect(showFilenamesList) #підключення кнопки до функції вибору директорії
 lw_files.currentRowChanged.connect(showChosenImage) #підключення списку до функції при зміні вибраного елемента
+btn_bw.clicked.connect(blackwhite_image) #підключення кнопки до функції перетворення зображення у чорно-біле
+
 app.exec()
