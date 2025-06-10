@@ -84,19 +84,37 @@ def showFilenamesList():
 
 #показати вибране зі списку зображення
 def showChosenImage():
-   if lw_files.currentRow >= 0:
+   if lw_files.currentRow() >= 0:
       filename = lw_files.currentItem().text() #отримання ім'я вибраного фалйа
-      workimage.loadImage(filename, workdir) #завантаження зображення
+      workimage.load_image(filename, workdir) #завантаження зображення
       image_path = os.path.join(workdir, workimage.filename) #формування шляху до зображення
       workimage.showImage(image_path, lb_image)
+   
+def apply_bw():
+   workimage.do_blackwhite(workdir, lb_image) #перетворення зображення у чорно-біле
 
-def blackwhite_image():
-   workimage.do_blackwhite(workdir, lb_image) #перетворення зображення у чорно-біле 
+def apply_left():
+   workimage.do_left(workdir, lb_image) #повернути зображення вліво
+
+def apply_right():
+   workimage.do_right(workdir, lb_image) #повернути зображення вправо
+
+def apply_flip():
+   workimage.do_flip(workdir, lb_image) #дзеркальне відображення зображення
+
+def apply_sharp():
+   workimage.do_sharp(workdir, lb_image) #застосування фільтру різкості до зображення
 
 
 #підключення кнопок до функцій
 btn_dir.clicked.connect(showFilenamesList) #підключення кнопки до функції вибору директорії
 lw_files.currentRowChanged.connect(showChosenImage) #підключення списку до функції при зміні вибраного елемента
-btn_bw.clicked.connect(blackwhite_image) #підключення кнопки до функції перетворення зображення у чорно-біле
 
+btn_bw.clicked.connect(apply_bw) #підключення кнопки до функції перетворення у ч/б
+btn_left.clicked.connect(apply_left) #підключення кнопки до функції повороту вліво
+btn_right.clicked.connect(apply_right) #підключення кнопки до функції повороту вправо
+btn_flip.clicked.connect(apply_flip) #підключення кнопки до функції дзеркального відображення
+btn_sharp.clicked.connect(apply_sharp) #підключення кнопки до функції застосування фільтру різкості
+
+win.show()
 app.exec()
