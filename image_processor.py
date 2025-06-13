@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageEnhance #для обробки зображень
 from PyQt5.QtGui import QPixmap #показ зображень у PyQt
 from PyQt5.QtCore import Qt
 
@@ -63,6 +63,20 @@ class ImageProcessor:
     def do_sharp(self, workdir, label):
         self.addToHistory()
         self.image = self.image.filter(ImageFilter.SHARPEN)
+        path = self.saveImage(workdir)
+        self.showImage(path, label)
+
+    def change_brigtness(self, factor, workdir, label): #factor = коофіцієнт яскравості (1.0 - без змін, <1.0 - затемнення, >1.0 - освітлення)
+        self.addToHistory()  #додаємо поточне зображення до історії перед зміною
+        enhancer = ImageEnhance.Brightness(self.image) #enhancer створює нове зображення з новою яскравістю
+        self.image = enhancer.enhance(factor) #застосування зміни яскравості за factor-ом
+        path = self.saveImage(workdir) 
+        self.showImage(path, label)
+
+    def change_contrast(self, factor, workdir, label): #factor = коофіцієнт контрасту (1.0 - без змін, <1.0 - зменшення контрасту, >1.0 - збільшення контрасту)
+        self.addToHistory() # додаємо поточне зображення до історії перед зміною
+        enhancer = ImageEnhance.Contrast(self.image)
+        self.image = enhancer.enhance(factor) # застосування зміни контрасту за factor-ом
         path = self.saveImage(workdir)
         self.showImage(path, label)
 
