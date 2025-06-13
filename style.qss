@@ -1,0 +1,48 @@
+
+QWidget {
+    background-color: #dce9cc; 
+    color: #2e2e2e;
+    font-family: Segoe UI, sans-serif;
+    font-size: 14px;
+}
+
+/* Заголовок картинки */
+QLabel {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3a4d27;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #aabe8c;
+    border: 1px solid #7a9e60;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-weight: bold;
+}
+
+/* Наведення на кнопку */
+QPushButton:hover {
+    background-color: #bcd49d;
+    border: 1px solid #5f8148;
+}
+
+/* Активна кнопка (при натисканні) */
+QPushButton:pressed {
+    background-color: #9cb678;
+}
+
+/* Список файлів */
+QListWidget {
+    background-color: #eef4e2;
+    border: 1px solid #b0c79d;
+    padding: 4px;
+}
+
+/* Зображення */
+QLabel#lb_image {
+    background-color: white;
+    border: 1px solid #aaa;
+    padding: 5px;
+}

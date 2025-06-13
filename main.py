@@ -13,7 +13,13 @@ from image_processor import ImageProcessor #імпорт класу для об�
 
 workimage = ImageProcessor() #створення об'єкта для роботи з зображеннями
 
+def loadStyle():
+   with open("style.qss", "r") as file:
+      style = file.read()
+      app.setStyleSheet(style) #завантаження стилю з файлу
+
 app = QApplication([])
+loadStyle()
 win = QWidget()       
 win.resize(700, 500) 
 win.setWindowTitle('Easy Editor')
@@ -28,6 +34,7 @@ btn_right = QPushButton("Вправо")
 btn_flip = QPushButton("Дзеркало")
 btn_sharp = QPushButton("Різкість")
 btn_bw = QPushButton("Ч/Б")
+btn_undo = QPushButton("Назад") #кнопка скасування останньої дії
 
 
 #створення макетів
@@ -46,6 +53,7 @@ row_tools.addWidget(btn_right)
 row_tools.addWidget(btn_flip)
 row_tools.addWidget(btn_sharp)
 row_tools.addWidget(btn_bw)
+row_tools.addWidget(btn_undo)
 col2.addLayout(row_tools)
 
 
@@ -105,6 +113,9 @@ def apply_flip():
 def apply_sharp():
    workimage.do_sharp(workdir, lb_image) #застосування фільтру різкості до зображення
 
+def undo():
+   workimage.undo(workdir, lb_image) #скасування останньої дії
+
 
 #підключення кнопок до функцій
 btn_dir.clicked.connect(showFilenamesList) #підключення кнопки до функції вибору директорії
@@ -115,6 +126,8 @@ btn_left.clicked.connect(apply_left) #підключення кнопки до �
 btn_right.clicked.connect(apply_right) #підключення кнопки до функції повороту вправо
 btn_flip.clicked.connect(apply_flip) #підключення кнопки до функції дзеркального відображення
 btn_sharp.clicked.connect(apply_sharp) #підключення кнопки до функції застосування фільтру різкості
+btn_undo.clicked.connect(undo) #підключення кнопки до функції скасування останньої дії
+
 
 win.show()
 app.exec()

@@ -20,6 +20,7 @@ btn_right = QPushButton("Вправо")
 btn_mirror = QPushButton("Дзеркало")
 btn_sharp = QPushButton("Різкість")
 btn_bw = QPushButton("Ч/Б")
+btn_undo = QPushButton("Назад")
 
 lw_filenames = QListWidget()
 
@@ -33,6 +34,7 @@ hbox_buttons.addWidget(btn_right)
 hbox_buttons.addWidget(btn_mirror)
 hbox_buttons.addWidget(btn_sharp)
 hbox_buttons.addWidget(btn_bw)
+hbox_buttons.addWidget(btn_undo)
 
 vbox_fold_lw.addWidget(btn_folder)
 vbox_fold_lw.addWidget(lw_filenames, 95)
